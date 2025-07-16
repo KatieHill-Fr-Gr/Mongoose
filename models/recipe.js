@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-import User from "./user.js"
-
 // * Define my schema
 
 const recipeSchema = new mongoose.Schema({
@@ -10,7 +8,7 @@ const recipeSchema = new mongoose.Schema({
         required: true 
     },
     contributor: { 
-        type: String, 
+        type: mongoose.Schema.Types.ObjectId,
         required: true, 
         ref: "User"
     },

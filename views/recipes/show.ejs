@@ -10,31 +10,35 @@
 
 <body>
     <%- include('../partials/nav') %>
-    <h1>
-        <%= recipe.name %>
-    </h1>
-    <h2>By <%= recipe.contributor %>
-    </h2>
-    <h3>
-        <%= recipe.cookingTime %>
-    </h3>
-    <ul>
-        <li>
-        <%= recipe.ingredients %>
-        </li>
-    </ul>
-    <p>
-      Method:  <%= recipe.method %>
-    </p>
-    <section class="controls">
-        <button type="edit"><a href="/recipes/<%= recipe._id %>/edit">Edit recipe</a></button>
-        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-            <button type="submit">Delete recipe</button>
-        </form>
-    </section>
+        <h1>
+            <%= recipe.name %>
+        </h1>
+        <h2>By <%= recipe.contributor.username %>
+        </h2>
+        <h3>
+            <%= recipe.cookingTime %>
+        </h3>
+        <ul>
+            <li>
+                <%= recipe.ingredients %>
+            </li>
+        </ul>
+        <p>
+            Method: <%= recipe.method %>
+        </p>
+        <% if (user && recipe.contributor.equals(user._id)) { %>
+            <section class="controls">
+                <button type="edit"><a href="/recipes/<%= recipe._id %>/edit">Edit recipe</a></button>
+                <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Delete recipe</button>
+                </form>
+            </section>
+            <% } %>
+
 </body>
 
 </html>
 
 <!-- Use the global user (pass-user-to-view) to access where or not the user is logged in -->
- <!-- How to check authorization so they can delete? Use req.session that has been passed to the global user -->
+<!-- How to check authorization so they can delete? Use req.session that has been passed to the global user -->
+<!--  add an if statement to the "Controls" section so it only shows in the user matches the contributor -->

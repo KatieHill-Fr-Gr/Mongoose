@@ -46,7 +46,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUnitialized: true,
+    saveUninitialized: true,
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI,
     })
@@ -74,5 +74,5 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
     console.error(err.stack)
-    res.status(500).render('An error occurred')
+    res.status(500).send('An error occurred')
 })

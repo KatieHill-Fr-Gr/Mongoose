@@ -33,7 +33,12 @@ router.get('/new', isSignedIn, (req, res) => {
 router.get('/:recipeId/edit', isSignedIn, async (req, res, next) => {
     try {
         const { recipeId } = req.params
-        const recipe = await Recipe.findById(recipeId)
+        const recipe = await Recipe.findById(recipeId).populate("contributor") // Mongoose sees contributor refers to user and replaces ObjectID with the full User record
+
+        if (!recipe.contributor.equals(req.session.user._id)) {
+            return res.status(403).send("You are not authorized to edit this entry")
+        }
+
         return res.render('recipes/edit.ejs', { recipe })
     } catch (error) {
         console.log(error)
@@ -45,10 +50,12 @@ router.get('/:recipeId/edit', isSignedIn, async (req, res, next) => {
 // Show 
 
 router.get('/:recipeId', async (req, res, next) => {
+    console.log("Show route")
     try {
         const { recipeId } = req.params
-        const recipe = await Recipe.findById(recipeId)
+        const recipe = await Recipe.findById(recipeId).populate("contributor", "username") // this gets the full user document
         return res.render('recipes/show.ejs', { recipe })
+        console.log(recipe)
     } catch (error) {
         console.log(error)
         next(error)
@@ -60,7 +67,10 @@ router.get('/:recipeId', async (req, res, next) => {
 
 router.post('/', isSignedIn, async (req, res, next) => { // remember to add the middleware to the arguments
     try {
-        const newRecipe = await Recipe.create(req.body)
+        const newRecipe = await Recipe.create({
+      ...req.body,
+      contributor: req.session.user._id // This manually adds the logged-in user to the contributor field
+    });
         return res.redirect(`/recipes/${newRecipe._id}`)
     } catch (error) {
         console.log(error)
