@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit <%= recipe.title %></title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+    <%- include('../partials/nav') %>
+    <h1>Edit <%= recipe.title %></h1>
+        <form action="/recipes/<%= recipe._id%>?_method=PUT" method="POST">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required value="<%=recipe.name%>">
+        </div>
+        <div>
+            <label for="contributor">Contributor</label>
+            <input type="text" name="contributor" id="contributor" required value="<%=recipe.contributor%>">
+        </div>
+        <div>
+            <label for="cookingTime">Cooking time</label>
+            <input type="text" name="cookingTime" id="cookingTime" required value="<%=recipe.cookingTime%>">
+        </div>
+        <div>
+            <label for="ingredients">Ingredients</label>
+            <textarea id="ingredients" name="ingredients" required value="<%=recipe.ingredients%>"></textarea>
+        </div>
+                <div>
+            <label for="method">Method</label>
+            <textarea id="method" name="method" required value="<%=recipe.method%>"></textarea>
+        </div>
+        <button type="submit">SUBMIT</button>
+    </form>
+</body>
+</html>

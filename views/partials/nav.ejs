@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekday Eats</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+    <nav>
+        <div id="landing-pages">
+            <a href="/">Home</a>
+            <a href="/recipes">Recipes</a>
+        </div>
+        <div id="user-actions">
+            <% if (user) { %>
+                <%= user.username %>
+                    <a href="/auth/sign-out" class="button-link">Sign out</a>
+                    <% } else { %>
+                        <a href="/auth/sign-in" class="button-link">Sign in</a>
+                        <% } %>
+        </div>
+    </nav>

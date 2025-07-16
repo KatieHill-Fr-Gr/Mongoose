@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New recipe</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+    <%- include('../partials/nav') %>
+    <h1>Create a new recipe</h1>
+    <form action="/recipes" method="POST">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div>
+            <label for="contributor">Contributor</label>
+            <input type="text" name="contributor" id="contributor" required>
+        </div>
+        <div>
+            <label for="cookingTime">Cooking time</label>
+            <input type="text" name="cookingTime" id="cookingTime" required>
+        </div>
+        <div>
+            <label for="ingredients">Ingredients</label>
+            <textarea id="ingredients" name="ingredients" required></textarea>
+        </div>
+                <div>
+            <label for="method">Method</label>
+            <textarea id="method" name="method" required></textarea>
+        </div>
+        <button type="submit">SUBMIT</button>
+    </form>
+
+</body>
+
+</html>

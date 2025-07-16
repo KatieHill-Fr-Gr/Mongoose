@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+      <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+
+  <h1>Create your user account</h1>
+  <p>Join our community and start contributing your work</p>
+  <form action="/auth/sign-up" method="POST">
+    <table>
+      <tr>
+        <td><label for="username">Username:</label></td>
+        <td><input type="text" name="username" id="username" /></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password:</label></td>
+        <td><input type="password" name="password" id="password" /></td>
+      </tr>
+      <tr>
+        <td><label for="confirmPassword">Confirm Password:</label></td>
+        <td><input type="password" name="confirmPassword" id="confirmPassword" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <button type="submit">Sign up</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <% if (typeof message !=='undefined' ) { %>
+    <p>
+      <%= message %>
+    </p>
+    <% } %>
+</body>
+
+</html>
