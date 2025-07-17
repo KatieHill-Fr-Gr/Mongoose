@@ -16,8 +16,13 @@ router.get('/profile', isSignedIn, async (req, res, next) => {
             contributor: req.session.user._id,
         }).populate('contributor');
 
+        const favouriteRecipes = await Recipe.find({
+           favouritedByUsers: req.session.user._id,
+        }).populate('contributor');
+
         res.render('users/show.ejs', {
-            myRecipes
+            myRecipes,
+            favouriteRecipes
         });
 
     } catch (error) {

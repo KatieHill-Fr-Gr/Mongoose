@@ -26,6 +26,28 @@
         <p>
             Method: <%= recipe.method %>
         </p>
+        <section class="favourites">
+        <!-- Display favourites section -->
+         <% if (recipe.favouritedByUsers.length > 0) { %>
+            <p>Liked by <%= recipe.favouritedByUsers.length %> users</p>
+                <% } else { %>
+                    <p>No one has liked this yet</p>
+                 <% } %>
+
+        <!-- Favourite/Unfavourite buttons -->
+        <% if (user) { %>
+            <% if (userHasFavourited) { %>
+                <form action="/recipes/<%= recipe._id %>/favourited-by/<%= user._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Unlike</button>
+                </form>
+            <% } else { %>
+                <form action="/recipes/<%= recipe._id %>/favourited-by/<%= user._id %>" method="POST">
+                    <button type="submit">Like</button>
+                </form>
+            <% } %>
+            <% } %>
+        </section>
+            
 
         <!-- Edit/Delete buttons -->
         <% if (user && recipe.contributor.equals(user._id)) { %>

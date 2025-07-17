@@ -2,30 +2,44 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Profile</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <%- include('../partials/nav.ejs') %>
-    <h1>Profile</h1>
+        <h1>Profile</h1>
 
-    <h2>My Recipes</h2>
-    <p>
-  You added <%= myRecipes.length %> <%= myRecipes.length === 1 ? 'recipe.' :
-  'recipes:' %>
-</p>
-   <ul>
-        <% myRecipes.forEach(recipe => { %>
-            <li>
-                <a href="/recipes/<%= recipe._id %>">
-                    <%= recipe.name %>
-                </a>
-            </li>
-            <% }) %>
-    </ul>
+        <h2>My Recipes</h2>
+        <p>
+            You added <%= myRecipes.length %>
+                <%= myRecipes.length===1 ? 'recipe.' : 'recipes:' %>
+        </p>
+        <ul>
+            <% myRecipes.forEach(recipe=> { %>
+                <li>
+                    <a href="/recipes/<%= recipe._id %>">
+                        <%= recipe.name %>
+                    </a>
+                </li>
+                <% }) %>
+        </ul>
 
-    <h2>My Favourites</h2>
-  </body>
+        <h2>My Favourites</h2>
+        <% if (favouriteRecipes.length===0) { %>
+            <p>You haven't liked any recipes yet</p>
+            <% } %>
+            <ul>
+              <% favouriteRecipes.forEach(recipe => { %>
+                <li>
+                    <a href ="/recipes/<%= recipe._id %>">
+                        <%= recipe.name %>, by <%= recipe.contributor.username %>
+                </li>
+               <% }) %>
+            </ul>
+</body>
+
 </html>

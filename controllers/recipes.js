@@ -54,7 +54,16 @@ router.get('/:recipeId', async (req, res, next) => {
     try {
         const { recipeId } = req.params
         const recipe = await Recipe.findById(recipeId).populate("contributor", "username") // this gets the full user document
-        return res.render('recipes/show.ejs', { recipe })
+
+        const userHasFavourited = recipe.favouritedByUsers.some(favouritedId => {
+            return favouritedId.equals(req.session.user._id)
+        })
+
+        return res.render('recipes/show.ejs', {
+            recipe,
+            userHasFavourited
+        })
+
     } catch (error) {
         console.log(error)
         next(error)
@@ -91,10 +100,10 @@ router.put('/:recipeId', isSignedIn, async (req, res, next) => {
         if (!recipeToDelete.contributor.equals(req.session.user._id)) {
             return res.status(403).send('You are forbidden from accessing this resource')
         }
-         await Recipe.findByIdAndUpdate(recipeId, req.body);
+        await Recipe.findByIdAndUpdate(recipeId, req.body);
 
         return res.redirect(`/recipes/${recipeId}`)
-        
+
     } catch (error) {
         console.log(error)
         next(error)
@@ -128,8 +137,9 @@ router.post('/:recipeId/favourited-by/:userId', isSignedIn, async (req, res, nex
         await Recipe.findByIdAndUpdate(recipeId, {
             $push: { favouritedByUsers: userId }
         })
+        console.log(userId)
 
-        return res.redirect(`/listings/${recipeId}`)
+        return res.redirect(`/recipes/${recipeId}`)
     } catch (error) {
         next(error)
     }
@@ -149,7 +159,7 @@ router.delete('/:recipeId/favourited-by/:userId', async (req, res, next) => {
             $pull: { favouritedByUsers: userId }
         })
 
-        return res.redirect(`/listings/${recipeId}`)
+        return res.redirect(`/recipes/${recipeId}`)
     } catch (error) {
         next(error)
     }
