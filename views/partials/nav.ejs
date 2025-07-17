@@ -16,8 +16,7 @@
         </div>
         <div id="user-actions">
             <% if (user) { %>
-              <%= user.username %>
-                 <!-- add link to /profile -->
+              <a href="/users/profile"><%= user.username %></a>
                     <a href="/auth/sign-out" class="button-link">Sign out</a>
                     <% } else { %>
                         <a href="/auth/sign-in" class="button-link">Sign in</a>

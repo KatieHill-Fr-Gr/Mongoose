@@ -23,7 +23,11 @@ const recipeSchema = new mongoose.Schema({
     method: { 
         type: String, 
         required: true  
-    }
+    },
+    favouritedByUsers: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User' 
+    }]
 })
 
 // * Define my model

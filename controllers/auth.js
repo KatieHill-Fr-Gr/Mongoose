@@ -118,30 +118,4 @@ router.get("/sign-out", (req, res) => {
     // wrapping req.session.destroy() around the res.direct avoids the race condition too
 });
 
-//* PROFILE ROUTE
-
-// this is where you create a get for /users/profile
-// here it will be auth/profile or put it in a users.js in your controllers dir.
-
-// router.get("/profile", isSignedIn, async (req, res, next) => {
-    // try {
-    
-    // const loggedInUser = req.ression.user._id
-
-    // const recipes = await Recipes.find({contributor: req.session.user._id
-    // })
-    // Get all the listings by the logged in user and here we can use filters
-
-
-    // Get all listings favorited by the logged in user
-    // const contributedRecipes = await Recipes.find(
-    // {contributor: loggedInUser
-    // }
-    // then use forEach in the ejs. to display these
-
-    //Reorder the profile template
-    // }}
-
-
-
 export { router as authRouter }

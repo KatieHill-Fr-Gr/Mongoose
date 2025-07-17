@@ -26,9 +26,12 @@
         <p>
             Method: <%= recipe.method %>
         </p>
+
+        <!-- Edit/Delete buttons -->
         <% if (user && recipe.contributor.equals(user._id)) { %>
             <section class="controls">
-                <button type="edit"><a href="/recipes/<%= recipe._id %>/edit">Edit recipe</a></button>
+                <button type="edit"><a href="/recipes/<%= recipe._id %>/edit">Edit
+                        recipe</a></button>
                 <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
                     <button type="submit">Delete recipe</button>
                 </form>

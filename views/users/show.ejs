@@ -1,0 +1,31 @@
+<!-- views/users/show.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+  </head>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Profile</h1>
+
+    <h2>My Recipes</h2>
+    <p>
+  You added <%= myRecipes.length %> <%= myRecipes.length === 1 ? 'recipe.' :
+  'recipes:' %>
+</p>
+   <ul>
+        <% myRecipes.forEach(recipe => { %>
+            <li>
+                <a href="/recipes/<%= recipe._id %>">
+                    <%= recipe.name %>
+                </a>
+            </li>
+            <% }) %>
+    </ul>
+
+    <h2>My Favourites</h2>
+  </body>
+</html>

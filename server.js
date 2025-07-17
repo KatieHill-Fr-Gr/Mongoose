@@ -14,6 +14,7 @@ const port = process.env.PORT
 import { defaultRouter } from "./controllers/default.js"
 import { recipesRouter } from "./controllers/recipes.js"
 import { authRouter } from "./controllers/auth.js"
+import { usersRouter } from "./controllers/users.js"
 
 import passUserToView from "./middleware/pass-user-to-view.js"
 import userMessage from "./middleware/user-message.js"
@@ -60,6 +61,7 @@ app.use(userMessage);
 app.use("/", defaultRouter);
 app.use("/recipes", recipesRouter);
 app.use("/auth", authRouter);
+app.use('/users', usersRouter);
 
 
 // * Error handlers
